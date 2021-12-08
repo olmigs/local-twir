@@ -1,0 +1,20 @@
+{
+    "name": "local-twir",
+    "version": "1.0.0",
+    "description": "TWiR when YOU want it",
+    "main": "twir.mjs",
+    "author": "Miguel D. Guerrero <migs@mdguerrero.com>",
+    "license": "MIT",
+    "private": false,
+    "scripts": {
+        "twir": "node --no-warnings twir.mjs",
+        "local-twir": "sirv twir --no-clear --port 6969"
+    },
+    "devDependencies": {
+        "colors": "^1.4.0"
+    },
+    "dependencies": {
+        "rss-parser": "^3.12.0",
+        "sirv-cli": "^1.0.0"
+    }
+}
