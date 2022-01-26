@@ -8,7 +8,8 @@
     "private": false,
     "scripts": {
         "twir": "node --no-warnings twir.mjs",
-        "local-twir": "sirv twir --no-clear --port 6969"
+        "local-twir": "sirv public --no-clear --port 6969",
+        "out-files": "node ../scripts/mod/build.mjs"
     },
     "devDependencies": {
         "colors": "^1.4.0"

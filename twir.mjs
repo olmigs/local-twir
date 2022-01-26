@@ -55,8 +55,8 @@ function handleTWIR(item, date) {
     )} to view at ${colors.link('http://localhost:6969/')}.`;
     let html = `<h1>` + item.title + '</h1>';
     html += '<p><strong>published ' + item.pubDate + '</strong></p>';
-    fs.writeFileSync('twir/head.html', html);
-    fs.writeFileSync('twir/twir.html', item.content);
+    fs.writeFileSync('public/head.html', html);
+    fs.writeFileSync('public/twir.html', item.content);
     log(logStr + '\n');
 }
 
