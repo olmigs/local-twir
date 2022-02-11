@@ -34,7 +34,7 @@ parser.parseURL(url).then((feed) => {
 /**
  * @param {Parser.Item} item
  */
-function handleTWIR(item, date) {
+function handleTWIR(item) {
     const today = getDay();
     let logStr = `Well, today is ${colors.warn.bold(today)}, `;
     const todate = new Date();

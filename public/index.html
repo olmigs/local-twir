@@ -26,14 +26,22 @@
             href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
         />
         <link rel="stylesheet" href="./global.css" />
+        <link rel="stylesheet" href="./build/bundle.css" />
+
+        <script defer src="./build/bundle.js"></script>
+        <!-- <script defer>
+            var nav = document.getElementById('nav');
+            nav.style.position = 'absolute';
+        </script> -->
     </head>
     <body>
+        <div id="nav"></div>
         <iframe
-            src="head.html"
+            src="./head.html"
             onload="this.insertAdjacentHTML('afterend', (this.contentDocument.body||this.contentDocument).innerHTML);this.remove()"
         ></iframe>
         <iframe
-            src="twir.html"
+            src="./twir.html"
             onload="this.insertAdjacentHTML('afterend', (this.contentDocument.body||this.contentDocument).innerHTML);this.remove()"
         ></iframe>
     </body>
