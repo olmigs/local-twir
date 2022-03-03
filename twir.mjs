@@ -1,17 +1,9 @@
 import * as fs from 'fs';
-import colors from 'colors';
+import chalk from 'chalk';
 import Parser from 'rss-parser';
 
 // global constants
-colors.setTheme({
-    feed: 'green',
-    title: 'red',
-    article: 'cyan',
-    link: 'yellow',
-    success: 'bgGreen',
-    error: 'bgRed',
-    warn: 'magenta',
-});
+const log = console.log;
 const url = 'https://this-week-in-rust.org/rss.xml';
 // global variables
 let parser = new Parser({
@@ -22,9 +14,9 @@ let parser = new Parser({
 
 // main
 parser.parseURL(url).then((feed) => {
-    log(colors.feed.bold('\n' + feed.title));
+    log(chalk.green.bold('\n' + feed.title));
     if (feed.lastBuildDate) {
-        log(colors.article(feed.lastBuildDate) + '\n');
+        log(chalk.cyan(feed.lastBuildDate) + '\n');
     }
     handleTWIR(feed.items[0]);
 });
@@ -36,23 +28,23 @@ parser.parseURL(url).then((feed) => {
  */
 function handleTWIR(item) {
     const today = getDay();
-    let logStr = `Well, today is ${colors.warn.bold(today)}, `;
+    let logStr = `Well, today is ${chalk.magenta.bold(today)}, `;
     const todate = new Date();
     const pub = new Date(item.pubDate);
     const daysAgo = Math.floor((todate.getTime() - pub.getTime()) / 86400000);
-    logStr += `and ${colors.feed.bold(
-        'TWiR'
-    )} was updated ${colors.warn.bold(daysAgo + ' day(s) ago')},\n\n`;
+    logStr += `and ${chalk.green.bold('TWiR')} was updated ${chalk.magenta.bold(
+        daysAgo + ' day(s) ago'
+    )},\n\n`;
     if (daysAgo > 4) {
         logStr += 'but you can still ';
     } else {
         logStr += 'so you should ';
     }
-    logStr += `read ${colors.article.bold(item.title)} at ${colors.link(
+    logStr += `read ${chalk.cyan.bold(item.title)} at ${chalk.yellow(
         item.link
-    )}\n\n    or call ${colors.green(
+    )}\n\n    or call ${chalk.green(
         'yarn local-twir'
-    )} to view at ${colors.link('http://localhost:6969/')}.`;
+    )} to view at ${chalk.yellow('http://localhost:6969/')}.`;
     let html = `<h1>` + item.title + '</h1>';
     html += '<p><strong>published ' + item.pubDate + '</strong></p>';
     fs.writeFileSync('public/head.html', html);
@@ -75,13 +67,4 @@ function getDay() {
         'Saturday',
     ];
     return days[date.getDay()];
-}
-
-/**
- * Wrapper around `console.log`.
- *
- * @param {string} msg
- */
-function log(msg) {
-    console.log(msg);
 }

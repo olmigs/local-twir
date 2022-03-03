@@ -11,10 +11,9 @@
         "local-twir": "sirv public --no-clear --port 6969",
         "out-files": "node ../scripts/mod/build.mjs"
     },
-    "devDependencies": {
-        "colors": "^1.4.0"
-    },
+    "devDependencies": {},
     "dependencies": {
+        "chalk": "^5.0.0",
         "rss-parser": "^3.12.0",
         "sirv-cli": "^1.0.0"
     }
