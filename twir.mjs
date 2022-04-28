@@ -35,7 +35,8 @@ function handleTWIR(item) {
     logStr += `and ${chalk.green.bold('TWiR')} was updated ${chalk.magenta.bold(
         daysAgo + ' day(s) ago'
     )},\n\n`;
-    if (daysAgo > 4) {
+    const tooLate = daysAgo > 4;
+    if (tooLate) {
         logStr += 'but you can still ';
     } else {
         logStr += 'so you should ';
@@ -45,10 +46,13 @@ function handleTWIR(item) {
     )}\n\n    or call ${chalk.green(
         'yarn local-twir'
     )} to view at ${chalk.yellow('http://localhost:6969/')}.`;
-    let html = `<h1>` + item.title + '</h1>';
-    html += '<p><strong>published ' + item.pubDate + '</strong></p>';
-    fs.writeFileSync('public/head.html', html);
-    fs.writeFileSync('public/twir.html', item.content);
+    if (!tooLate) {
+        let html = `<h1>` + item.title + '</h1>';
+        html += '<p><strong>published ' + item.pubDate + '</strong></p>';
+        fs.writeFileSync('public/head.html', html);
+        fs.writeFileSync('public/twir.html', item.content);
+        
+    }
     log(logStr + '\n');
 }
 
